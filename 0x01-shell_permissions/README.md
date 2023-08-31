@@ -7,3 +7,5 @@ Switches the current user to the user `betty`.
 Prints the effective username of the current user.
 ### `2-groups`
 Prints all the groups the current user is part of.
+### `5-execute`
+Adds execute permission to the owner of the file `hello`.
