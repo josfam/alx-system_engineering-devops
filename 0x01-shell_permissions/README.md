@@ -28,3 +28,5 @@ Sets the mode of the file `hello` to this:
 ```
 ### `10-mirror_permissions`
 Sets the mode of the file `hello` the same as `olleh`’s mode.
+### `12-directory_permissions`
+Creates a directory called `my_dir` with permissions 751 in the working directory.
