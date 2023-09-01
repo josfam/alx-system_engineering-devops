@@ -30,3 +30,5 @@ Sets the mode of the file `hello` to this:
 Sets the mode of the file `hello` the same as `olleh`’s mode.
 ### `12-directory_permissions`
 Creates a directory called `my_dir` with permissions 751 in the working directory.
+### `13. Change group`
+Script that changes the group owner to `school` for the file `hello`.
