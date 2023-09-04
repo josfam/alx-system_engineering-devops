@@ -19,4 +19,6 @@ Displays the third line of the file `iacta`.
 writes into the file ls_cwd_content the result of the command ls -la.
 If the file ls_cwd_content already exists, it is overwritten.
 If the file ls_cwd_content does not exist, it is created.
-
+### `9-duplicate_last_line`
+Duplicates the last line of the file `iacta`.
+The file `iacta` will be in the working directory.
