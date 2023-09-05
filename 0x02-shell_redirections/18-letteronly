@@ -1,0 +1,2 @@
+#!/bin/bash
+ls --format=single-column | grep -E "^[A-Za-z]"
