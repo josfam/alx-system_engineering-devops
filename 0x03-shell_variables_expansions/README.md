@@ -20,4 +20,6 @@ Lists all local variables and environment variables, and functions.
 creates a new local variable.
 Name: `BEST`
 Value: `School`
+### `7-create_global_variable`
+Creates a new global variable.
 
