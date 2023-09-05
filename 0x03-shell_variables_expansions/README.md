@@ -16,4 +16,8 @@ Counts the number of directories in the PATH.
 Lists environment variables. 
 ### `5-local_variables`
 Lists all local variables and environment variables, and functions.
+### `6-create_local_variable`
+creates a new local variable.
+Name: `BEST`
+Value: `School`
 
