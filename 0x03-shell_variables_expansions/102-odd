@@ -1,0 +1,2 @@
+#!/bin/bash
+grep -E '^[[:blank:]]*[0-9][02468]' | cut --fields=2
