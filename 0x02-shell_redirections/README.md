@@ -25,3 +25,6 @@ If the file ls_cwd_content does not exist, it is created.
 ### `9-duplicate_last_line`
 Duplicates the last line of the file `iacta`.
 The file `iacta` will be in the working directory.
+### `16-whatsnext`
+Display lines containing the pattern “root” and 3 lines after 
+them in the file `/etc/passwd`.
