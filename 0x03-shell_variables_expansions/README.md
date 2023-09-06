@@ -46,3 +46,8 @@ Prints all possible combinations of two letters, except oo.
 - The output is alpha ordered, starting with aa
 - `oo` is not printed
 - Script file contains a maximum 64 characters
+### `13-print_float`
+Prints a number with two decimal places, followed by a new line.
+
+The number will be stored in the environment variable NUM.
+
