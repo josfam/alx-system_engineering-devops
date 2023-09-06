@@ -1,0 +1,2 @@
+#!/bin/bash
+ls -SaR | find . -name "*.gif" | rev | cut -d '.' -f 2- | cut -d '/' -f1 | rev | sort -f
