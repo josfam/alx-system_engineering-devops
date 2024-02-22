@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+printCount=0
+maxPrints=10
+
+while [ $printCount -lt $maxPrints ]
+do
+	if [ $printCount == 8 ]
+	then
+		echo "Best School"
+		echo "Hi"
+	else
+		echo "Best School"
+	fi
+	((printCount++))
+done
+
