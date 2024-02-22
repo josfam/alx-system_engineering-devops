@@ -10,10 +10,13 @@ MAX_NUM=20
 while [ $count -le $MAX_NUM ]; do
     case $count in
     4)
+        echo "$count"
         echo "bad luck from China";;
     9)
+        echo "$count"
         echo "bad luck from Japan";;
     17)
+        echo "$count"
         echo "bad luck from Italy";;
     *)
         echo "$count"
