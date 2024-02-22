@@ -10,7 +10,7 @@ MAX_MINUTE=59
 
 while [ $hour -le $MAX_HOUR ]; do
     echo "Hour: $hour"
-    minute=0
+    minute=1
     while [ $minute -le $MAX_MINUTE ]; do
         echo "$minute"
         ((minute++))
