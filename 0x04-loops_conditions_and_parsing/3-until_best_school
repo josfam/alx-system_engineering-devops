@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Prints "Best School" ten times, with an until loop
+
+printCount=0
+maxPrints=10
+
+until [ $printCount -eq $maxPrints ]
+do
+	echo "Best School"
+	((printCount++))
+done
+
