@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# Prints "Best School" 10 times, with a "Hi" at iteration 9
 printCount=0
 maxPrints=10
 
