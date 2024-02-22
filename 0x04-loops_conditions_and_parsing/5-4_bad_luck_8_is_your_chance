@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# loops from 1 to 10 and
+# displays bad luck for the 4th loop iteration
+# displays good luck for the 8th loop iteration
+# displays Best School for the other iterations
+
+iter_count=0
+fourth_iter=3
+eighth_iter=7
+max_iters=10
+
+while [ $iter_count -lt $max_iters ]
+do
+	if [ $iter_count -eq $fourth_iter ]; then
+		echo "bad luck"
+	elif [ $iter_count -eq $eighth_iter ]; then
+		echo "good luck"
+	else
+		echo "Best School"
+	fi
+	((iter_count++))
+done
