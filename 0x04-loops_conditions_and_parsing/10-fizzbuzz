@@ -10,11 +10,11 @@ START_NUM=1
 STOP_NUM=100
 
 for (( i=START_NUM; i<=STOP_NUM; i++ )); do
-	if (( $i%15==0 )); then
+	if (( i%15==0 )); then
 		echo "FizzBuzz"
-	elif (( $i%3==0 )); then
+	elif (( i%3==0 )); then
 		echo "Fizz"
-	elif (( $i%5==0 )); then
+	elif (( i%5==0 )); then
 		echo "Buzz"
 	else
 		echo "$i"
