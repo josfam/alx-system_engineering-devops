@@ -3,9 +3,21 @@
 
 custom_html_file='custom-hello.html'
 default_html_file='index.nginx-debian.html'
+html_path='/var/www/html'
+sites_enabled_path='/etc/nginx/sites-enabled'
 
 apt install -y nginx;
-touch /var/www/html/"$custom_html_file"
+touch "$html_path/$custom_html_file"
+
+custom_config="server {
+	listen 80 default_server;
+	server_name _;
+
+	location / {
+		default_type text/plain;
+		return 200 \"Hello World!\";
+	}
+}"
 
 html_content="<!DOCTYPE html>
 <html>
@@ -15,14 +27,21 @@ html_content="<!DOCTYPE html>
 	</body>
 </html>"
 
-echo "$html_content" > /var/www/html/"$custom_html_file"
+echo "$html_content" > "$html_path/$custom_html_file"
 
-# keep original nginx file as backup
-if [[ -f "/var/www/html/$default_html_file" ]]; then
-	mv /var/www/html/"$default_html_file" /var/www/html/"$default_html_file".bk
+# keep original nginx html file as backup
+if [[ -f "$html_path/$default_html_file" ]]; then
+	mv "$html_path/$default_html_file" "$html_path/$default_html_file".bk
 fi
 
 # add custom file to nginx configuration file
 sed -i "s/$default_html_file/$default_html_file $custom_html_file/" /etc/nginx/sites-available/default
+
+# keep original config, and regenerate new config with custom instructions
+mv "$sites_enabled_path/default" "$sites_enabled_path/default.bk"
+touch "$sites_enabled_path/default"
+echo "$custom_config" > "$sites_enabled_path/default"
+
+# soft link 
 nginx -s reload;
 
