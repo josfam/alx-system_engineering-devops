@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Installs nginx and serves a page in the server
+
+custom_html_file='custom-hello.html'
+default_html_file='index.nginx-debian.html'
+
+apt install -y nginx;
+touch /var/www/html/"$custom_html_file"
+
+html_content="<!DOCTYPE html>
+<html>
+	<head></head>
+	<body>
+		<h1>Hello World!</h1>
+	</body>
+</html>"
+
+echo "$html_content" > /var/www/html/"$custom_html_file"
+
+# keep original nginx file as backup
+if [[ -f "/var/www/html/$default_html_file" ]]; then
+	mv /var/www/html/"$default_html_file" /var/www/html/"$default_html_file".bk
+fi
+
+# add custom file to nginx configuration file
+sed -i "s/$default_html_file/$default_html_file $custom_html_file/" /etc/nginx/sites-available/default
+nginx -s reload;
+
