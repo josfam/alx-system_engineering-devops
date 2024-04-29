@@ -4,3 +4,6 @@ user_authenticating_into_server
 # pcap files
 telnet.pcap
 
+#files and scripts
+rockyou-11CharsLong.txt
+start-sylvain-container.sh
