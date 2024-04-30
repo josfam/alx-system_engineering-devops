@@ -21,17 +21,39 @@ html_content="<!DOCTYPE html>
 
 echo "$html_content" > "$html_path/$custom_html_file"
 
-# keep original nginx html file as backup
+# backup original nginx html file if present
 if [[ -f "$html_path/$default_html_file" ]]; then
 	mv "$html_path/$default_html_file" "$html_path/$default_html_file".bak
 fi
 
-# add custom file to nginx configuration file
-sed -i "s/$default_html_file/$default_html_file $custom_html_file/" "$sites_available_path"/default
+# custom server config
+server_block_config="server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root $html_path;
+	index $custom_html_file;
+
+	server_name _;
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		try_files \$uri \$uri/ =404;
+	}
+}
+"
+
+# backup original sites-enabled config if present
+if [[ -f "$sites_available_path"/default ]]; then
+	mv "$sites_available_path"/default "$sites_available_path"/default.bak
+fi
+
+touch "$sites_available_path"/default
+echo "$server_block_config" > "$sites_available_path"/default
 
 # delete existing `default` link, and re-construct it
 rm "$sites_enabled_path"/default
-ln -s "$sites_available_path"/default "$sites_enabled_path"/
+ln -s "$sites_available_path"/default "$sites_enabled_path"/default
 
 nginx -s reload;
-
