@@ -9,6 +9,13 @@ sites_available_path='/etc/nginx/sites-available'
 
 apt update
 apt install -y nginx;
+
+# assign ownership to the currently logged in user
+chown -R "$USER:$USER" /var/www/html
+
+# make sure web root permissions are correct
+chown -R 755 /var/www
+
 touch "$html_path/$custom_html_file"
 
 html_content="<!DOCTYPE html>
