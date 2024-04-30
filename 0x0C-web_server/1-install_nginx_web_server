@@ -7,6 +7,7 @@ html_path='/var/www/html'
 sites_enabled_path='/etc/nginx/sites-enabled'
 sites_available_path='/etc/nginx/sites-available'
 
+apt update
 apt install -y nginx;
 touch "$html_path/$custom_html_file"
 
