@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# serves a page from apache, by making sure that the service is running
+
+sudo service apache2 start;
