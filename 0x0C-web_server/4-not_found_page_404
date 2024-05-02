@@ -9,6 +9,7 @@ sites_enabled_path='/etc/nginx/sites-enabled'
 sites_available_path='/etc/nginx/sites-available'
 
 apt update
+apt upgrade -y
 apt install -y nginx;
 
 # assign ownership to the currently logged in user
