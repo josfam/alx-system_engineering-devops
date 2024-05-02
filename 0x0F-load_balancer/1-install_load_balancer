@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+default_haproxy_config='/etc/default/haproxy'
+cfg_file='/etc/haproxy/haproxy.cfg'
+
+apt update
+apt upgrade -y
+
+# haproxy install
+apt install -y haproxy;
+
+# set ENABLED value in haproxy's default configuration
+echo "ENABLED=1" >> $default_haproxy_config
+
+frontend_backend_rules="
+frontend listener
+	# listens on port 80
+	bind :80
+	# servers to use for the backend
+	default_backend backend_servers
+
+backend backend_servers
+	balance roundrobin
+	server web-01 54.160.122.175
+	server web-02 54.208.168.38
+"
+
+# add front and backend rules to cfg
+echo "$frontend_backend_rules" >> $cfg_file
+
