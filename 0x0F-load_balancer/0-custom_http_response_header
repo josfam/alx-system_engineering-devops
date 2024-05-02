@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+# Installs nginx and serves a custom-page in the server
+
+custom_404='custom-404.html'
+custom_root_page='custom-hello.html'
+default_root_page='index.nginx-debian.html'
+html_path='/var/www/html'
+sites_enabled_path='/etc/nginx/sites-enabled'
+sites_available_path='/etc/nginx/sites-available'
+
+apt update
+apt upgrade -y
+apt install -y nginx;
+
+# assign ownership to the currently logged in user
+chown -R "$USER:$USER" /var/www/html
+
+# make sure web root permissions are correct
+chown -R 755 /var/www
+
+touch "$html_path/$custom_root_page"
+
+html_content="<!DOCTYPE html>
+<html>
+	<head></head>
+	<body>
+		<h1>Hello World!</h1>
+	</body>
+</html>"
+
+echo "$html_content" > "$html_path/$custom_root_page"
+
+
+# create 404 page
+error_404_content="<!DOCTYPE html>
+<html>
+	<head></head>
+	<body>
+		<h1>Ceci n'est pas une page</h1>
+	</body>
+</html>"
+
+touch "$html_path/$custom_404"
+echo "$error_404_content" > "$html_path/$custom_404"
+
+
+# backup original nginx html file if present
+if [[ -f "$html_path/$default_root_page" ]]; then
+	mv "$html_path/$default_root_page" "$html_path/$default_root_page".bak
+fi
+
+
+# custom server config
+server_block_config="server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	root $html_path;
+	index $custom_root_page;
+
+	server_name _;
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		try_files \$uri \$uri/ =404;
+	}
+
+	location /redirect_me {
+		return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+	}
+
+	error_page 404 /$custom_404;
+	
+	# custom headers
+	add_header X-Served-By \$hostname;
+}
+"
+
+# backup original sites-enabled config if present
+if [[ -f "$sites_available_path"/default ]]; then
+	mv "$sites_available_path"/default "$sites_available_path"/default.bak
+fi
+
+touch "$sites_available_path"/default
+echo "$server_block_config" > "$sites_available_path"/default
+
+# delete existing `default` link, and re-construct it
+rm "$sites_enabled_path"/default
+ln -s "$sites_available_path"/default "$sites_enabled_path"/default
+
+nginx -s reload;
