@@ -21,8 +21,8 @@ frontend listener
 
 backend backend_servers
 	balance roundrobin
-	server web-01 54.160.122.175
-	server web-02 54.208.168.38
+	server 525815-web-01 54.160.122.175
+	server 525815-web-02 54.208.168.38
 "
 
 # add front and backend rules to cfg
