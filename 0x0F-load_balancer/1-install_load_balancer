@@ -29,3 +29,6 @@ backend backend_servers
 # add front and backend rules to cfg
 echo "$frontend_backend_rules" >> $cfg_file
 
+# restart haproxy
+service haproxy restart
+
