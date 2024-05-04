@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # prints information about subdomains
 
-# querys the provided url, returning the contents of the ANSWER SECTION
+# querys the provided url, and prints necessary information
 print_record_ip() {
 	local domain="$1"
 	local subdomain="$2"
@@ -15,7 +15,6 @@ print_record_ip() {
 	record=$(echo "$answer_line" | awk '{print $4}')
 	ip=$(echo "$answer_line" | awk '{print $NF}')
 	echo "The subdomain $2 is a $record record and points to $ip"
-	# echo "$record $ip"
 }
 
 domain=$1
