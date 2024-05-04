@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# prints information about subdomains
+
+# querys the provided url, returning the contents of the ANSWER SECTION
+print_record_ip() {
+	local domain="$1"
+	local subdomain="$2"
+	local fullDomain="$subdomain.$domain"
+
+	answer_line=$(dig "$fullDomain" \
+		| grep -A1 ';; ANSWER SECTION:' \
+		| sed 's/;; ANSWER SECTION://' \
+		| sed '/^$/d'
+	)
+	record=$(echo "$answer_line" | awk '{print $4}')
+	ip=$(echo "$answer_line" | awk '{print $NF}')
+	echo "The subdomain $2 is a $record record and points to $ip"
+	# echo "$record $ip"
+}
+
+domain=$1
+if (( $# == 2 )); then
+	subdomain=$2
+	print_record_ip "$domain" "$subdomain"
+	exit 0;
+else
+	print_record_ip "$domain" "www"
+	print_record_ip "$domain" "lb-01"
+	print_record_ip "$domain" "web-01"
+	print_record_ip "$domain" "web-02"
+fi
