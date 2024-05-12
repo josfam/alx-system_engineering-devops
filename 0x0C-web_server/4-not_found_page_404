@@ -2,7 +2,7 @@
 # Installs nginx and serves a custom-page in the server
 
 custom_404='custom-404.html'
-custom_root_page='custom-hello.html'
+custom_html_page='custom-hello.html'
 default_root_page='index.nginx-debian.html'
 html_path='/var/www/html'
 sites_enabled_path='/etc/nginx/sites-enabled'
@@ -18,7 +18,7 @@ chown -R "$USER:$USER" /var/www/html
 # make sure web root permissions are correct
 chown -R 755 /var/www
 
-touch "$html_path/$custom_root_page"
+touch "$html_path/$custom_html_page"
 
 html_content="<!DOCTYPE html>
 <html>
@@ -28,7 +28,7 @@ html_content="<!DOCTYPE html>
 	</body>
 </html>"
 
-echo "$html_content" > "$html_path/$custom_root_page"
+echo "$html_content" > "$html_path/$custom_html_page"
 
 
 # create 404 page
@@ -56,7 +56,7 @@ server_block_config="server {
 	listen [::]:80 default_server;
 
 	root $html_path;
-	index $custom_root_page;
+	index $custom_html_file index.html index.nginx-debian.html;
 
 	server_name _;
 
