@@ -40,7 +40,7 @@ server_block_config="server {
 	listen [::]:80 default_server;
 
 	root $html_path;
-	index $custom_html_file;
+	index $custom_html_file index.html index.nginx-debian.html;
 
 	server_name _;
 
