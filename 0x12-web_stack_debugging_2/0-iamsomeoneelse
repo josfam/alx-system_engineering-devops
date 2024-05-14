@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# runs commands as the user passed as the argument to the script
+new_user=$1
+sudo su "$new_user" -c whoami
+
