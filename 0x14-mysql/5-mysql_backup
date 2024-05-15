@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# creates a dump of mysql data, and creates a tar.gz archive
+
+MYSQL_PWD=$1
+
+# generate dump file
+mysqldump -u root -p "$MYSQL_PWD" --all-databases > backup.sql
+
+# day-month-year format for tar archive
+time_format=$(date +'%d-%m-%Y')
+
+# create tar.gz archive
+tar -cvf "$time_format.tar.gz" backup.sql
+
