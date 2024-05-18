@@ -22,7 +22,7 @@ sudo chown -R nginx:nginx "$log_dir"
 
 # nginx should listen on port 8080, on all active IPs
 sites_available="/etc/nginx/sites-available/default"
-sed "s/80 default_server;/8080 default_server;/" "$sites_available"
+sed -i "s/80 default_server;/8080 default_server;/" "$sites_available"
 
 sudo service nginx start
 
