@@ -3,6 +3,8 @@
 # nginx must be listening on all active IPs on port 8080
 # apt-get remove cannot be used
 
+sudo service nginx stop
+
 # create the nginx user, with no login if it does not exist
 if ! grep "^nginx:" /etc/passwd > /dev/null; then
 	sudo useradd --system --shell /sbin/nologin nginx
@@ -17,4 +19,10 @@ web_root="/var/www/html"
 log_dir="/var/www/html"
 sudo chown -R nginx:nginx "$web_root"
 sudo chown -R nginx:nginx "$log_dir"
+
+# nginx should listen on port 8080, on all active IPs
+sites_available="/etc/nginx/sites-available/default"
+sed "s/80 default_server;/8080 default_server;/" "$sites_available"
+
+sudo service nginx start
 
