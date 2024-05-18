@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Runs nginx as the user `nginx` with these requirements
+# nginx must be listening on all active IPs on port 8080
+# apt-get remove cannot be used
+
+# create the nginx user, with no login if it does not exist
+if ! grep "^nginx:" /etc/passwd > /dev/null; then
+	sudo useradd --system --shell /sbin/nologin nginx
+fi
+
+# change the user in nginx the nginx.conf config file
+nginx_conf="/etc/nginx/nginx.conf"
+sudo sed -i 's/^user .*/user nginx;/' "$nginx_conf"
+
+# give the nginx user necessary permissions in web root dir
+web_root="/var/www/html"
+log_dir="/var/www/html"
+sudo chown -R nginx:nginx "$web_root"
+sudo chown -R nginx:nginx "$log_dir"
+
