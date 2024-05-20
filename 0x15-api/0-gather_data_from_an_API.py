@@ -26,7 +26,7 @@ if __name__ == '__main__':
         total_tasks += 1
         if todo.get('completed'):
             completed_task_count += 1
-        task_names.append(todo.get('title'))
+            task_names.append(todo.get('title'))
 
     print('Employee {} is done with tasks({}/{}):'.format(
         name, completed_task_count, total_tasks))
