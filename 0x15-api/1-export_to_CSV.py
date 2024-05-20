@@ -17,7 +17,7 @@ if __name__ == '__main__':
     user = requests.get(user_url).json()
     todos = requests.get(todos_url).json()
 
-    name = user.get('name')
+    username = user.get('username')
     all_tasks = []
 
     # extract information for the user with a matching employee id
@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
         task_summary = {
             "USER_ID": employee_id,
-            "USERNAME": name,
+            "USERNAME": username,
             "TASK_COMPLETED_STATUS": todo.get('completed'),
             "TASK_TITLE": todo.get('title')
             }
