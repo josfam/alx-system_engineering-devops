@@ -33,13 +33,12 @@ if __name__ == '__main__':
             }
         all_tasks.append(task_summary)
 
+    # construct, and write to the csv file, while quoting all strings
+    output_file = '{}.csv'.format(employee_id)
 
-# construct, and write to the csv file, while quoting all strings
-output_file = '{}.csv'.format(employee_id)
-
-with open(output_file, 'w', encoding='utf-8') as f:
-    field_names = [
-        'USER_ID', 'USERNAME', 'TASK_COMPLETED_STATUS', 'TASK_TITLE']
-    writer = csv.DictWriter(f, fieldnames=field_names, dialect='unix')
-    for task in all_tasks:
-        writer.writerow(task)
+    with open(output_file, 'w', encoding='utf-8') as f:
+        field_names = [
+            'USER_ID', 'USERNAME', 'TASK_COMPLETED_STATUS', 'TASK_TITLE']
+        writer = csv.DictWriter(f, fieldnames=field_names, dialect='unix')
+        for task in all_tasks:
+            writer.writerow(task)
