@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
-"""Gathers data from an api"""
+"""Gathers employee data from an api, and exports a given employees summary
+as a csv file
+"""
 
 if __name__ == '__main__':
     import csv
