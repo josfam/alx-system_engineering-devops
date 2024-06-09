@@ -5,4 +5,4 @@
 *.ipynb
 
 # example scripts
-0-main.py
+*-main.py
