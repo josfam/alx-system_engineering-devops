@@ -1,0 +1,5 @@
+# . folders
+.*/
+
+# jupyter notebooks
+*.ipynb
