@@ -3,3 +3,6 @@
 
 # jupyter notebooks
 *.ipynb
+
+# example scripts
+0-main.py
