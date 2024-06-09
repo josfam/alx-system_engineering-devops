@@ -2,14 +2,14 @@
 
 """Fetches the number of subscribers in a subreddit"""
 
-import sys
-import requests
-
 
 def number_of_subscribers(subreddit):
     """Returns the number of subscribers in the provided subreddit.
     Returns 0 if the subreddit does not exist
     """
+    import requests
+    import sys
+
     subreddit = sys.argv[1]
     url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
     custom_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML,\
